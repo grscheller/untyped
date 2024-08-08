@@ -13,18 +13,28 @@
 # limitations under the License.
 
 """
-Useful tools I found difficult to implement in a well typed manner.
+Useful modules I found difficult to implement in a strictly typed manner.
+
+## Modules
+
+### module `grscheller.untyped.nothing`
 
 #### class `Nothing()`
 
-Singleton class representing a non-existent value.
+Class representing a non-existent value.
+
+* Nothing() is a singleton
+* Nothing() instances should be compared with the `is` operator, not `==`
+* enforcing strict typing will results in my[py] complications
+
+#### module instance variable `nothing`
 
 * nothing = Nothing() is a singleton
-* nothing should be compared with the `is` operator, not `==`
-* enforcing strict typing results in my[py] complications
+
+---
 
 """
-__version__ = "0.0.0.3"
+__version__ = "0.0.0.4"
 __author__ = "Geoffrey R. Scheller"
 __copyright__ = "Copyright (c) 2024 Geoffrey R. Scheller"
 __license__ = "Apache License 2.0"
