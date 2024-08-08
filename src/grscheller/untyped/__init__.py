@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-### Useful tools I found difficult to implement in a well typed manner.
+Useful tools I found difficult to implement in a well typed manner.
 
 #### class `Nothing()`
 
@@ -21,10 +21,10 @@ Singleton class representing a non-existent value.
 
 * nothing = Nothing() is a singleton
 * nothing should be compared with the `is` operator, not `==`
-* more strict typing results in pdoc internal errors related to __getattr__
+* enforcing strict typing results in my[py] complications
 
 """
-__version__ = "0.0.0.2"
+__version__ = "0.0.0.3"
 __author__ = "Geoffrey R. Scheller"
 __copyright__ = "Copyright (c) 2024 Geoffrey R. Scheller"
 __license__ = "Apache License 2.0"

@@ -1,6 +1,6 @@
 # Python untyped tooling
 
-Useful tools I found difficult to implement in a well typed manner.
+Useful modules I found difficult to implement in a well typed manner.
 
 ## Overview
 
@@ -11,7 +11,7 @@ Useful tools I found difficult to implement in a well typed manner.
 
 ### Modules
 
-* grscheller.fp.nothing
+* grscheller.untyped.nothing
 
 ---
 
