@@ -25,16 +25,19 @@ Class representing a non-existent value.
 
 * Nothing() is a singleton
 * Nothing() instances should be compared with the `is` operator, not `==`
-* enforcing strict typing will results in my[py] complications
+* my[py] becomes problematic when module is strictly typed
+  * implementing the module becomes vastly more complicated
+  * in client code my[py] keeps warning you about what you are doing
+  * maybe using `Any` in this use case is not a bad thing
 
-#### module instance variable `nothing`
+#### instance variable: `nothing`
 
 * nothing = Nothing() is a singleton
 
 ---
 
 """
-__version__ = "0.0.0.4"
+__version__ = "0.0.0.5"
 __author__ = "Geoffrey R. Scheller"
 __copyright__ = "Copyright (c) 2024 Geoffrey R. Scheller"
 __license__ = "Apache License 2.0"
