@@ -24,7 +24,7 @@ Singleton class representing a non-existent value.
 * more strict typing results in pdoc internal errors related to __getattr__
 
 """
-__version__ = "0.0.0.1"
+__version__ = "0.0.0.2"
 __author__ = "Geoffrey R. Scheller"
 __copyright__ = "Copyright (c) 2024 Geoffrey R. Scheller"
 __license__ = "Apache License 2.0"

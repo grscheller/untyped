@@ -1,28 +1,20 @@
-# Python Functional Programming (FP)
+# Python untyped tooling
 
-Functional programming tools which endeavor to be Pythonic.
+Useful tools I found difficult to implement in a well typed manner.
 
 ## Overview
 
 * Source code for the grscheller.fp PyPI Package
-* [grscheller.fp][1] project on PyPI
+* [grscheller.untyped][1] project on PyPI
 * [Detailed API documentation][2] on GH-Pages
 * [Source code][3] on GitHub
 
 ### Modules
 
 * grscheller.fp.nothing
-* grscheller.fp.iterables
-* grscheller.fp.woException
-
-### Benefits of FP
-
-* improved composability
-* avoid exception driven code paths
-* data sharing becomes trivial due to immutability
 
 ---
 
-[1]: https://pypi.org/project/grscheller.fp/
-[2]: https://grscheller.github.io/fp/
-[3]: https://github.com/grscheller/fp/
+[1]: https://pypi.org/project/grscheller.untyped/
+[2]: https://grscheller.github.io/untyped/
+[3]: https://github.com/grscheller/untyped/
