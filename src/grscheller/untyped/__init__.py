@@ -37,7 +37,7 @@ Class representing a non-existent value.
 ---
 
 """
-__version__ = "0.1.0"
+__version__ = "0.1.0.1"
 __author__ = "Geoffrey R. Scheller"
 __copyright__ = "Copyright (c) 2024 Geoffrey R. Scheller"
 __license__ = "Apache License 2.0"
