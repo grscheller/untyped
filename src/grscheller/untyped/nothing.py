@@ -15,13 +15,11 @@
 """A nothing is an attempt to give Python a "bottom" type.
 
 * unlike a true bottom, it can be instantiated as a singleton
-* types like ~T|None and ~T|() act like a poor man's Optional/Maybe Monads
-* both None and () make for lousy bottom types
-* both don't accept many methods, None has no length, at least () is iterable
-* when returning or iterating values, both must constantly be checked for
-* many developers use None and () as sentinel values
-* therefore by design Null & () are store-able in this data structure
-
+* types like `~T|None` and `~T|()` act like a poor man's Optional/Maybe Monad
+  * both None and () make for lousy bottom types
+  * both don't accept many methods, None has no length, at least () is iterable
+  * both must constantly be checked for when returned from functions
+  * many developers will None and () as sentinel values
 """
 
 from __future__ import annotations
@@ -32,15 +30,29 @@ __copyright__ = "Copyright (c) 2023-2024 Geoffrey R. Scheller"
 __license__ = "Apache License 2.0"
 
 from typing import Any, Callable, Iterator, Optional
+from collections import namedtuple
+
+_Nothing_Nada = namedtuple('_Nothing_Nada', 'x')
+_nada = _Nothing_Nada(None)
 
 class Nothing():
-    """Singleton semantically represents a missing value.
+    """
+    #### Singleton semantically represents a missing value.
 
     * nothing: Nothing = Nothing() is a singleton representing an absent value
-    * returns itself for arbitrary method calls
-    * returns itself if called as a Callable with arbitrary arguments
-    * interpreted as an empty container by standard Python functions
     * makes for a better "bottom type" than either None or ()
+      * returns itself for arbitrary method calls
+      * returns itself if called as a Callable with arbitrary arguments
+      * interpreted as an empty container by standard Python functions
+      * for comparison operators return `False` to "stop an action"
+        * behaves like IEEE Float NAN's with comparison operators
+        * avoid using else clauses when comparing ~T|Nothing values
+        * when on left:
+          * always returns `False`
+        * when on right:
+          * relies on the "std convention" of returning `False` if types differ
+          * avoid using `~T|Nothing` values on right side of comparisons
+            * especially for numerical comparisons
     """
     __slots__ = ()
 
@@ -73,24 +85,42 @@ class Nothing():
     def __rmul__(self, left: Any) -> Any:
         return Nothing()
 
+    def __ge__(self, right: Any) -> bool:
+        return False
+
+    def __gt__(self, right: Any) -> bool:
+        return False
+
+    def __le__(self, right: Any) -> bool:
+        return False
+
+    def __lt__(self, right: Any) -> bool:
+        return False
+
+    def __eq__(self, right: Any) -> bool:
+        return False
+
+    def __ne__(self, right: Any) -> bool:
+        return False
+
     def __getitem__(self, index: int|slice) -> Any:
         return Nothing()
 
     def __setitem__(self, index: int|slice, item: Any) -> None:
         return
 
+    def __call__(*args: Any, **kwargs: Any) -> Any:
+        return Nothing()
+
     def __getattr__(self, name: str) -> Callable[[Any], Any]:
-        """pdoc gags on this commented-out code when generating docs"""
+        """Commented out for doc generation, pdoc gags on this method."""
         def method(*args: Any, **kwargs: Any) -> Any:
             return Nothing()
         return method
 
-    def __call__(*args: Any, **kwargs: Any) -> Any:
-        return Nothing()
-
-    def get(self, alt: Optional[Any]=(None, (13, 7), None, 42424242)) -> Any:
+    def get(self, alt: Optional[Any]=_nada) -> Any:
         """Returns an alternate value, defaults Nothing()."""
-        if alt == (None, (13, 7), None, 42424242):  # an unlikely sentinel value
+        if alt == _nada:
             return Nothing()
         else:
             return alt
