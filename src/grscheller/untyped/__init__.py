@@ -1,4 +1,4 @@
-# Copyright 2023-2024 Geoffrey R. Scheller
+# Copyright 2024 Geoffrey R. Scheller
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,9 +13,10 @@
 # limitations under the License.
 
 """
-Useful modules I found difficult to implement in a strictly typed manner.
+## Untyped modules
 
-## Modules
+Useful modules I found difficult to implement in a strictly typed manner. Not
+intended to be used with strictly typed code.
 
 ### module `grscheller.untyped.nothing`
 
@@ -25,19 +26,19 @@ Class representing a non-existent value.
 
 * Nothing() is a singleton
 * Nothing() instances should be compared with the `is` operator, not `==`
-* my[py] becomes problematic when the nothing module is strictly typed
-  * implementing the module becomes vastly more complicated
+* my[py] becomes problematic when this module is used in a strict typing context
+  * implementing this module with strict typing is vastly more complicated
   * in client code my[py] keeps warning me about what I am doing
-  * maybe using `Any` in this use case is not a bad thing
+  * lots of type annotations needed, feels like early Java
 
 #### instance variable: `nothing`
 
-* nothing = Nothing() is a singleton
+* nothing: Nothing = Nothing() is a singleton
 
 ---
 
 """
-__version__ = "0.1.0.2"
+__version__ = "0.1.1"
 __author__ = "Geoffrey R. Scheller"
 __copyright__ = "Copyright (c) 2024 Geoffrey R. Scheller"
 __license__ = "Apache License 2.0"

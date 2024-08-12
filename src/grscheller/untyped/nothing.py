@@ -12,35 +12,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""A nothing is an attempt to give Python a "bottom" type.
+"""#### Singleton object representing a missing value
 
-* unlike a true bottom, it can be instantiated as a singleton
-* types like `~T|None` and `~T|()` act like a poor man's Optional/Maybe Monad
-  * both None and () make for lousy bottom types
-  * both don't accept many methods, None has no length, at least () is iterable
+* this module was an attempt to give Python a "bottom" type
+  * a true bottom type has no instantiated values
+  * nothing: Nothing is instantiated as a singleton
+* types like `~T|None` and `~T|()` are a poor man's Maybe Monad
+  * both `None` and `()` make for lousy "bottom" types
+  * both accept few methods
+    * `None` has no length
+    * `()` at least is iterable
   * both must constantly be checked for when returned from functions
-  * many developers will None and () as sentinel values
+  * it is Pythonic for developers to use `None` and `()` as sentinels
 """
 
 from __future__ import annotations
 
 __all__ = [ 'Nothing', 'nothing' ]
-__author__ = "Geoffrey R. Scheller"
-__copyright__ = "Copyright (c) 2023-2024 Geoffrey R. Scheller"
-__license__ = "Apache License 2.0"
 
-from typing import Any, Callable, Iterator, Optional
-from collections import namedtuple
+from typing import Any, Callable, Final, Iterator
 
-_Nothing_Nada = namedtuple('_Nothing_Nada', 'x')
-_nada = _Nothing_Nada(None)
+_Nothing_Nada = tuple[None, tuple[None, tuple[None, tuple[None, None]]]]
+_nothing_nada: _Nothing_Nada = None, (None, (None, (None, None)))
 
 class Nothing():
     """
-    #### Singleton semantically represents a missing value.
+    ##### Singleton semantically represents a missing value.
 
-    * nothing: Nothing = Nothing() is a singleton representing an absent value
-    * makes for a better "bottom type" than either None or ()
+    * singleton nothing: Nothing = Nothing() represents a non-existent value
+    * makes for a better "bottom type" than either `None` or `()`
       * returns itself for arbitrary method calls
       * returns itself if called as a Callable with arbitrary arguments
       * interpreted as an empty container by standard Python functions
@@ -113,14 +113,16 @@ class Nothing():
         return Nothing()
 
     def __getattr__(self, name: str) -> Callable[[Any], Any]:
-        """Commented out for doc generation, pdoc gags on this method."""
+        """Comment out for doc generation, pdoc gags on this method."""
         def method(*args: Any, **kwargs: Any) -> Any:
             return Nothing()
         return method
 
-    def get(self, alt: Optional[Any]=_nada) -> Any:
-        """Returns an alternate value, defaults Nothing()."""
-        if alt == _nada:
+    def get(self, alt: Any=_nothing_nada) -> Any:
+        """
+        ##### Get an alternate value, defaults to Nothing().
+        """
+        if alt == _nothing_nada:
             return Nothing()
         else:
             return alt

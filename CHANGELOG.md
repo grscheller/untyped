@@ -2,7 +2,7 @@
 
 PyPI grscheller.untyped project.
 
-## Semantic Versioning
+#### Semantic versioning
 
 * first digit
   * major event, epoch, or paradigm shift
@@ -15,8 +15,16 @@ PyPI grscheller.untyped project.
   * minor changes
   * significant documentation updates
 * forth digit (development environment only)
+  * commit count of "non-trivial" changes/regressions
+  * third digit now plays the role of the second
 
 ## Releases and Important Milestones
+
+### Version 0.1.1 - Initial PyPI Release: 2024-08-12
+
+* prototype of a module level inaccessible sentinel value
+  * _nothing_nada: _Nothing_Nada
+  * for use only within the grscheller.untyped module itself
 
 ### Version 0.1.0 - Initial PyPI Release: 2024-08-08
 
