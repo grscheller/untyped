@@ -15,7 +15,7 @@
 from __future__ import annotations
 
 from typing import Optional
-from grscheller.untyped.nothing import Nothing, nothing
+from grscheller.untyped.nothing import Nothing, nothing  # type: ignore
 
 def add2(x: int) -> int:
     return x + 2
@@ -77,7 +77,7 @@ class Test_Nothing:
             assert False
         if no1 == 42:
             assert False
-        else:  # best to avoid else clauses when comparing ~T|Nothing values
+        else:  # best to avoid else: clauses when comparing ~T|Nothing values
             assert True
         if no1 != 42:
             assert False
@@ -85,9 +85,7 @@ class Test_Nothing:
             assert True
         if no1 == 5:
             assert False
-        if no1 is 5:
-            assert False
-        if 5 is no1:
+        if 5 == no1:
             assert False
         assert not (no1 == no2)  # Behaves like IEEE Float NAN's
         assert not (no1 != no2)
