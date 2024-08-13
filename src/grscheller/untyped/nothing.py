@@ -37,22 +37,15 @@ _nothing_nada: _Nothing_Nada = None, (None, (None, (None, None)))
 
 class Nothing():
     """
-    ##### Singleton semantically represents a missing value.
+    #### Singleton semantically represents a missing value.
 
     * singleton nothing: Nothing = Nothing() represents a non-existent value
     * makes for a better "bottom type" than either `None` or `()`
       * returns itself for arbitrary method calls
       * returns itself if called as a Callable with arbitrary arguments
       * interpreted as an empty container by standard Python functions
-      * for comparison operators return `False` to "stop an action"
-        * behaves like IEEE Float NAN's with comparison operators
-        * avoid using else clauses when comparing ~T|Nothing values
-        * when on left:
-          * always returns `False`
-        * when on right:
-          * relies on the "std convention" of returning `False` if types differ
-          * avoid using `~T|Nothing` values on right side of comparisons
-            * especially for numerical comparisons
+      * comparison ops compare true only when 2 non-missing values compare true
+        * when compared to itself behaves somewhat like IEEE Float NAN's
     """
     __slots__ = ()
 
@@ -63,6 +56,9 @@ class Nothing():
 
     def __iter__(self) -> Iterator[Any]:
         return iter(())
+
+    def __hash__(self) -> int:
+        return hash((_nothing_nada, (_nothing_nada,)))
 
     def __repr__(self) -> str:
         return 'nothing'
@@ -85,6 +81,14 @@ class Nothing():
     def __rmul__(self, left: Any) -> Any:
         return Nothing()
 
+    def __eq__(self, right: Any) -> bool:
+        """Never equals anything, even itself."""
+        return False
+
+    def __ne__(self, right: Any) -> bool:
+        """Always does not equal anything, even itself."""
+        return True
+
     def __ge__(self, right: Any) -> bool:
         return False
 
@@ -95,12 +99,6 @@ class Nothing():
         return False
 
     def __lt__(self, right: Any) -> bool:
-        return False
-
-    def __eq__(self, right: Any) -> bool:
-        return False
-
-    def __ne__(self, right: Any) -> bool:
         return False
 
     def __getitem__(self, index: int|slice) -> Any:

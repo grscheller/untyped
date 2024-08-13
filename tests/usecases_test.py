@@ -52,3 +52,38 @@ class Test_Builtin_Containers:
         zud2 = list(filter(None, baz))
         assert zud1 == [23, -5, -1, 40]
         assert zud2 == [23, 40]
+
+    def test_mixed_tuples(self) -> None:
+        tup0: tuple[tuple[int|Nothing, ...]|Nothing, ...] = \
+            (0, 1, 2, 3), \
+            (-1, 10, nothing, 30, 40, nothing, 60), \
+            tuple(range(40, 81)) + (nothing, nothing), \
+            nothing, \
+            (99, nothing)*5
+
+        tup1: tuple[int|Nothing, ...] = ()
+
+        for idx in range(len(tup0)):
+            tup1 += tup0[idx][2],
+        assert tup1 == (2, nothing, 42, nothing, 99)
+
+    def test_dicts(self) -> None:
+        dict1 = {None:'0', ():'1', nothing:'2', 42:'42'}
+        assert dict1[None] == str(0)
+        assert dict1[()] == str(1)
+        assert dict1[nothing] == str(2)   # comment out for grscheller.untyped
+        assert dict1[Nothing()] == str(2) # PyPI version < 0.1.2
+        assert dict1[42] == str(42)
+
+        foo = Nothing()
+        bar = Nothing()
+        dict2 = {1: 42, 2: foo, 3: bar}
+        assert dict2[1] == 42
+        assert dict2[2] is Nothing()
+        assert dict2[3] is Nothing()
+        assert dict2[2] is dict2[3]
+        assert foo is bar  # Nothing() behaves like an IEEE Floating-point NAN.
+        assert foo != bar  # Only want True if two real things are not equal.
+        assert dict2[2] != foo
+        assert dict2[2] != dict2[3]
+        assert dict2[2] != dict2[2]

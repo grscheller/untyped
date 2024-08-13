@@ -45,54 +45,38 @@ class Test_Nothing:
         no1 = Nothing()
         no2 = Nothing()
         no3 = nothing
-        assert not (no1 == no1)
-        assert not (no2 == no2)
-        assert not (no3 == no2)
-        assert not (no1 == no2)
-        assert not (no2 == no1)
-        assert not (no1 == nothing)
-        assert not (no1 != no1)
-        assert not (no2 != no2)
-        assert not (no3 != no2)
-        assert not (no1 != no2)
-        assert not (no2 != no1)
-        assert not (no1 != nothing)
+
         assert no1 is no1
         assert no2 is no2
         assert no3 is no2
         assert no1 is no2
         assert no2 is no1
         assert no1 is nothing
-        assert not (no1 == 42)
-        assert not (no2 == 42)
-        assert not (no1 != 42)
-        assert not (no2 != 42)
-        if no1 != no2:
-            assert False
-        else:
-            assert True
-        if no1 is nothing:
-            assert True
-        else:
-            assert False
-        if no1 == 42:
-            assert False
-        else:  # best to avoid else: clauses when comparing ~T|Nothing values
-            assert True
-        if no1 != 42:
-            assert False
-        else:
-            assert True
-        if no1 == 5:
-            assert False
-        if 5 == no1:
-            assert False
-        assert not (no1 == no2)  # Behaves like IEEE Float NAN's
-        assert not (no1 != no2)
+
+        assert not (no1 == no2)
+        assert no1 != no2
+        assert no3 != nothing
         assert not (no1 <= no2)
         assert not (no1 >= no2)
         assert not (no1 < no2)
         assert not (no1 > no2)
+        assert not (no2 <= no1)
+        assert not (no2 >= no1)
+        assert not (no2 < no1)
+        assert not (no2 > no1)
+        assert not (no1 == 5)
+        assert no1 != 5
+        assert not (no1 <= 5)
+        assert not (no1 >= 5)
+        assert not (no1 < 5)
+        assert not (no1 > 5)
+        assert not (5 == no1)
+        assert 5 != no1
+        assert not (5 <= no1)
+        assert not (5 >= no1)
+        assert not (5 < no1)
+        assert not (5 > no1)
+
 
     def test_len(self) -> None:
         no1 = Nothing()
@@ -161,13 +145,13 @@ class Test_Nothing:
         no1 = Nothing()
         no2 = Nothing()
         assert 2 + 3 == 5
-        assert not (no2 + 99 != no1)
+        assert no2 + 99 != no1
         assert no2 + 99 is no1
-        assert not (86 + no1 != no2)
+        assert 86 + no1 != no2
         assert 86 + no1 is no2
-        assert not (no2 * 99 != no1)
+        assert no2 * 99 != no1
         assert no2 * 99 is no1
-        assert not (86 * no1 != no2)
+        assert 86 * no1 != no2
         assert 86 * no1 is no2
 
 class test_arbitrary_Methods:
