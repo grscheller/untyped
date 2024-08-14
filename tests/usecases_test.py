@@ -16,6 +16,7 @@ from __future__ import annotations
 
 from typing import Any
 from grscheller.untyped.nothing import Nothing, nothing  # type: ignore
+from grscheller.circular_array.ca import CA
 
 def add2(x: int|Nothing) -> int:
     return x + 2
@@ -87,3 +88,27 @@ class Test_Builtin_Containers:
         assert dict2[2] != foo
         assert dict2[2] != dict2[3]
         assert dict2[2] != dict2[2]
+
+    def test_comparibility(self) -> None:
+        cir1 = 42, CA(42, nothing)
+        cir2 = 42, CA(42, nothing)
+        assert cir1 == cir2  # CAs now compare with identity before equality
+        assert not (cir1 is cir2)
+
+        tup1 = 42, [42]
+        tup2 = 42, [42]
+        assert tup1 == tup2  # lists must compare identity before equality
+        assert not (tup1 is tup2)
+
+        tup3 = 42, [42, nothing]
+        tup4 = 42, [42, nothing]
+        assert tup3 == tup4
+        assert not (tup3 is tup4)  # because both contain mutable objects
+        assert tup3[1].pop(-1) is nothing
+        assert tup4[1].pop(-1) is nothing
+        tup3[1].append(100)
+        tup4[1].append(200)
+        assert tup3 != tup4
+        tup4[1][1] -= 100
+        assert tup3 == tup4
+

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""#### Singleton object representing a missing value
+"""### Singleton object representing a missing value
 
 * this module was an attempt to give Python a "bottom" type
   * a true bottom type has no instantiated values
@@ -23,7 +23,7 @@
     * `None` has no length
     * `()` at least is iterable
   * both must constantly be checked for when returned from functions
-  * it is Pythonic for developers to use `None` and `()` as sentinels
+  * it is common for developers to use `None` and `()` as sentinel values
 """
 
 from __future__ import annotations
