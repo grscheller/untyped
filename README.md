@@ -1,17 +1,18 @@
-# PyPI grscheller.untyped Project
+# Python modules geared to code that is not strictly typed
 
-Useful modules I found difficult to implement in a strictly typed
-manner.
+Useful modules I found difficult to implement in a strictly
+typed manner.
 
-* Repositories for grscheller.untyped PyPI Project
+* **Repositories**
   * [grscheller.untyped][1] project on *PyPI*
   * [Source code][2] on *GitHub*
-* Detailed documentation for grscheller.untyped
+* **Detailed documentation**
   * [Detailed API documentation][3] on *GH-Pages*
 
 ### Modules
 
 * grscheller.untyped.nothing
+  * singleton representing the absence of a value
 
 ---
 
