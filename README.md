@@ -12,6 +12,8 @@ manner.
 ### Modules
 
 * grscheller.untyped.nothing
+  * singleton representing the absence of a value
+  * geared to less strictly typed situations
 
 ---
 

@@ -24,7 +24,7 @@ intended to be used with strictly typed code.
 
 Class representing a non-existent value.
 
-* Nothing() is a singleton
+* nothing = Nothing() is a singleton
 * Nothing() instances should be compared with the `is` operator, not `==`
 * my[py] becomes problematic when this module is used in a strict typing context
   * implementing this module with strict typing is vastly more complicated
@@ -38,7 +38,7 @@ Class representing a non-existent value.
 ---
 
 """
-__version__ = "0.1.1.2"
+__version__ = "0.2.0"
 __author__ = "Geoffrey R. Scheller"
 __copyright__ = "Copyright (c) 2024 Geoffrey R. Scheller"
 __license__ = "Apache License 2.0"

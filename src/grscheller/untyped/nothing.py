@@ -12,53 +12,46 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""### Singleton object representing a missing value
+"""#### An attempt at a bottom type
 
-* this module was an attempt to give Python a "bottom" type
-  * a true bottom type has no instantiated values
-  * nothing: Nothing is instantiated as a singleton
-* types like `~T|None` and `~T|()` are a poor man's Maybe Monad
-  * both `None` and `()` make for lousy "bottom" types
-  * both accept few methods
-    * `None` has no length
-    * `()` at least is iterable
-  * both must constantly be checked for when returned from functions
-  * it is common for developers to use `None` and `()` as sentinel values
-"""
+A version of grscheller.fp.nada geared for use in less strictly
+typed code."""
 
 from __future__ import annotations
+from typing import Any, Callable, Final, Iterator, NewType
 
 __all__ = [ 'Nothing', 'nothing' ]
 
-from typing import Any, Callable, Final, Iterator
-
-_Nothing_Nada = tuple[None, tuple[None, tuple[None, tuple[None, None]]]]
-_nothing_nada: _Nothing_Nada = None, (None, (None, (None, None)))
+_S = NewType('_S', tuple[tuple[()], tuple[tuple[()], tuple[tuple[()], None]]])
+_sentinel: Final[_S] = _S(((), ((), ((), None))))
 
 class Nothing():
     """
     #### Singleton semantically represents a missing value.
 
-    * singleton nothing: Nothing = Nothing() represents a non-existent value
-    * makes for a better "bottom type" than either `None` or `()`
-      * returns itself for arbitrary method calls
-      * returns itself if called as a Callable with arbitrary arguments
-      * interpreted as an empty container by standard Python functions
-      * comparison ops compare true only when 2 non-missing values compare true
-        * when compared to itself behaves somewhat like IEEE Float NAN's
+    * singleton nothing: nothing = Nothing() represents a non-existent value
+    * returns itself for arbitrary method calls
+    * returns itself if called as a Callable with arbitrary arguments
+    * interpreted as an empty container by standard Python functions
+    * comparison ops compare true only when 2 non-missing values compare true
+      * when compared to itself behaves somewhat like IEEE Float NAN's
+        * `nothing is nothing` is true
+        * `nothing == nothing` is false
+        * `nothing != nothing` is true
     """
     __slots__ = ()
 
     def __new__(cls) -> Nothing:
         if not hasattr(cls, 'instance'):
             cls.instance = super(Nothing, cls).__new__(cls)
+            cls._hash = hash((_sentinel, (_sentinel,)))
         return cls.instance
 
     def __iter__(self) -> Iterator[Any]:
         return iter(())
 
     def __hash__(self) -> int:
-        return hash((_nothing_nada, (_nothing_nada,)))
+        return self._hash
 
     def __repr__(self) -> str:
         return 'nothing'
@@ -69,16 +62,16 @@ class Nothing():
     def __len__(self) -> int:
         return 0
 
-    def __add__(self, right: Any) -> Any:
+    def __add__(self, right: Any) -> Nothing:
         return Nothing()
 
-    def __radd__(self, left: Any) -> Any:
+    def __radd__(self, left: Any) -> Nothing:
         return Nothing()
 
-    def __mul__(self, right: Any) -> Any:
+    def __mul__(self, right: Any) -> Nothing:
         return Nothing()
 
-    def __rmul__(self, left: Any) -> Any:
+    def __rmul__(self, left: Any) -> Nothing:
         return Nothing()
 
     def __eq__(self, right: Any) -> bool:
@@ -116,11 +109,11 @@ class Nothing():
             return Nothing()
         return method
 
-    def get(self, alt: Any=_nothing_nada) -> Any:
+    def get(self, alt: Any=_sentinel) -> Any:
         """
-        ##### Get an alternate value, defaults to Nothing().
+        ##### Get an alternate value, defaults to Nada().
         """
-        if alt == _nothing_nada:
+        if alt == _sentinel:
             return Nothing()
         else:
             return alt
