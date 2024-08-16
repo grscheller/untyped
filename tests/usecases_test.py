@@ -83,11 +83,10 @@ class Test_Builtin_Containers:
         assert dict2[2] is Nothing()
         assert dict2[3] is Nothing()
         assert dict2[2] is dict2[3]
-        assert foo is bar  # Nothing() behaves like an IEEE Floating-point NAN.
-        assert foo != bar  # Only want True if two real things are not equal.
-        assert dict2[2] != foo
-        assert dict2[2] != dict2[3]
-        assert dict2[2] != dict2[2]
+        assert foo is bar
+        assert dict2[2] is foo
+        assert dict2[2] is dict2[3]
+        assert dict2[2] is dict2[2]
 
     def test_comparibility(self) -> None:
         cir1 = 42, CA(42, nothing)
