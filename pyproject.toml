@@ -21,7 +21,7 @@ dynamic = ["version", "description"]
 keywords = ["bottom", "nothing"]
 
 [project.optional-dependencies]
-test = ["pytest >=7.4", "grscheller.circular-array >=3.4.0 < 3.5"]
+test = ["pytest >=7.4", "grscheller.circular-array >=3.4.0, <3.5"]
 
 [project.urls]
 Source = "https://github.com/grscheller/untyped"
