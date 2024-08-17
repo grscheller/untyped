@@ -20,7 +20,13 @@ PyPI grscheller.untyped project.
 
 ## Releases and Important Milestones
 
-### Version 0.1.1 - Initial PyPI Release: 2024-08-12
+### Version 0.2.0 - PyPI Release: 2024-08-17
+
+* typing improvements back-ported from grscheller.fp
+* updated optional dependencies to use grscheller.circular-array 3.4.0
+  * for tests/
+
+### Version 0.1.1 - PyPI Release: 2024-08-12
 
 * prototype of a module level inaccessible sentinel value
   * _nothing_nada: _Nothing_Nada

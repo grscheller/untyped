@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-## Untyped modules
+## Untyped Modules
 
 Useful modules I found difficult to implement in a strictly typed manner. Not
 intended to be used with strictly typed code.
@@ -26,10 +26,6 @@ Class representing a non-existent value.
 
 * nothing = Nothing() is a singleton
 * Nothing() instances should be compared with the `is` operator, not `==`
-* my[py] becomes problematic when this module is used in a strict typing context
-  * implementing this module with strict typing is vastly more complicated
-  * in client code my[py] keeps warning me about what I am doing
-  * lots of type annotations needed, feels like early Java
 
 #### instance variable: `nothing`
 

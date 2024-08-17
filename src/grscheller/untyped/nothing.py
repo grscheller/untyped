@@ -12,18 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""#### An attempt at a bottom type
+"""#### Singleton Representing a Non-existing Value
 
 A version of grscheller.fp.nada geared for use in less strictly
-typed code."""
+typed code.
+"""
 
 from __future__ import annotations
-from typing import Any, Callable, Final, Iterator, NewType
+from typing import Any, Callable, Iterator, NewType
 
 __all__ = [ 'Nothing', 'nothing' ]
 
 _S = NewType('_S', tuple[tuple[()], tuple[tuple[()], tuple[tuple[()], None]]])
-_sentinel: Final[_S] = _S(((), ((), ((), None))))
+_sentinel: _S = _S(((), ((), ((), None))))
 
 class Nothing():
     """
@@ -47,7 +48,7 @@ class Nothing():
             cls._hash = hash((_sentinel, (_sentinel,)))
         return cls.instance
 
-    def __iter__(self) -> Iterator[Any]:
+    def __iter__(self) -> Iterator:
         return iter(())
 
     def __hash__(self) -> int:
