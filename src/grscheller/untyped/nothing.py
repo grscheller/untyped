@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""#### Singleton Representing a Non-existing Value
+"""### Singleton Representing a Non-existing Value
 
 A version of grscheller.fp.nada geared for use in less strictly
 typed code.
@@ -48,7 +48,7 @@ class Nothing():
             cls._hash = hash((_sentinel, (_sentinel,)))
         return cls.instance
 
-    def __iter__(self) -> Iterator:
+    def __iter__(self) -> Iterator[Any]:
         return iter(())
 
     def __hash__(self) -> int:
