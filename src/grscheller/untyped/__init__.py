@@ -13,28 +13,16 @@
 # limitations under the License.
 
 """
-## Untyped Modules
+### Untyped Modules
 
-Useful modules I found difficult to implement in a strictly typed manner. Not
-intended to be used with strictly typed code.
+Versions of grscheller modules intended for use with less strictly typed code.
 
-### module `grscheller.untyped.nothing`
-
-#### class `Nothing()`
-
-Class representing a non-existent value.
-
-* nothing = Nothing() is a singleton
-* Nothing() instances should be compared with the `is` operator, not `==`
-
-#### instance variable: `nothing`
-
-* nothing: Nothing = Nothing() is a singleton
+* module `grscheller.untyped.nothing`
 
 ---
 
 """
-__version__ = "0.2.0"
+__version__ = "0.2.0.1"
 __author__ = "Geoffrey R. Scheller"
 __copyright__ = "Copyright (c) 2024 Geoffrey R. Scheller"
 __license__ = "Apache License 2.0"
