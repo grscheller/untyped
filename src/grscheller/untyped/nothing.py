@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""### Singleton Representing a Non-existing Value
+"""
+### Singleton Representing a Non-existing Value
 
-A version of grscheller.fp.nada geared for use in less strictly
-typed code.
+A version of grscheller.fp.nada geared for use in less strictly typed code.
+
 """
 
 from __future__ import annotations
@@ -28,17 +29,20 @@ _sentinel: _S = _S(((), ((), ((), None))))
 
 class Nothing():
     """
-    #### Singleton semantically represents a missing value.
+    #### Singleton representing a missing value.
 
     * singleton nothing: nothing = Nothing() represents a non-existent value
     * returns itself for arbitrary method calls
     * returns itself if called as a Callable with arbitrary arguments
     * interpreted as an empty container by standard Python functions
-    * comparison ops compare true only when 2 non-missing values compare true
-      * when compared to itself behaves somewhat like IEEE Float NAN's
+    * warning: non-standard equality semantics
+      * comparison compares true only when 2 non-missing values compare true
+        * when compared to itself behaves somewhat like IEEE Float NAN's
         * `nothing is nothing` is true
         * `nothing == nothing` is false
         * `nothing != nothing` is true
+      * thus a == b means two non-missing values compare as equal
+
     """
     __slots__ = ()
 
@@ -76,11 +80,9 @@ class Nothing():
         return Nothing()
 
     def __eq__(self, right: Any) -> bool:
-        """Never equals anything, even itself."""
         return False
 
     def __ne__(self, right: Any) -> bool:
-        """Always does not equal anything, even itself."""
         return True
 
     def __ge__(self, right: Any) -> bool:
@@ -112,7 +114,8 @@ class Nothing():
 
     def get(self, alt: Any=_sentinel) -> Any:
         """
-        ##### Get an alternate value, defaults to Nada().
+        Get an alternate value, defaults to Nothing().
+
         """
         if alt == _sentinel:
             return Nothing()
