@@ -15,14 +15,14 @@
 """
 ### Untyped Modules
 
-Versions of grscheller modules intended for use with less strictly typed code.
+PyPI grscheller namespace modules intended for use with less strictly typed code.
 
-* module `grscheller.untyped.nothing`
+* module `grscheller.untyped.nada`
 
 ---
 
 """
-__version__ = "0.3.0"
+__version__ = "0.3.1.0"
 __author__ = "Geoffrey R. Scheller"
 __copyright__ = "Copyright (c) 2024 Geoffrey R. Scheller"
 __license__ = "Apache License 2.0"

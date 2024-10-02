@@ -97,21 +97,21 @@ class Test_Nada:
     def test_nget(self) -> None:
         no1 = Nada()
         no2 = Nada()
-        assert no1.nget(42) == 42
-        assert no2.nget(21) == 21
-        got1 = no1.nget()
-        got2 = no1.nget('forty-two')
+        assert no1.nada_get(42) == 42
+        assert no2.nada_get(21) == 21
+        got1 = no1.nada_get()
+        got2 = no1.nada_get('forty-two')
         assert got1 is Nada()
         assert got2 is 'forty-two'
         assert got2 == 'forty-two'
-        assert no2.nget(13) == (10 + 3)
-        assert no2.nget(10//7) == 10//7
+        assert no2.nada_get(13) == (10 + 3)
+        assert no2.nada_get(10//7) == 10//7
 
     def test_equal_self(self) -> None:
         no1 = Nada()
         no1 != no1
-        no1.nget(42) == no1.nget(42)
-        no1.nget(42) != no1.nget(21)
+        no1.nada_get(42) == no1.nada_get(42)
+        no1.nada_get(42) != no1.nada_get(21)
 
     def test_map(self) -> None:
         no1 = Nada()
@@ -136,9 +136,9 @@ class Test_Nada:
         assert no1[2:7:1] is nada
         no2[1:40:2] = 1,2,3,4,5,6,7
         assert no2 is nada
-        got = no1.nget()
+        got = no1.nada_get()
         assert got is nada
-        got = no1.nget(42)
+        got = no1.nada_get(42)
         assert got == 42
 
     def test_add_mul(self) -> None:

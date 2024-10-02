@@ -130,7 +130,7 @@ class Nada():
             return Nada()
         return method
 
-    def nget(self, alt: Any=_sentinel) -> Any:
+    def nada_get(self, alt: Any=_sentinel) -> Any:
         """
         Get an alternate value, defaults to Nada().
 
