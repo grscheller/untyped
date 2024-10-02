@@ -15,47 +15,47 @@
 from __future__ import annotations
 
 from typing import Optional
-from grscheller.untyped.nothing import Nothing, nothing  # type: ignore
+from grscheller.untyped.nada import Nada, nada  # type: ignore
 
 def add2(x: int) -> int:
     return x + 2
 
-def gt42(x: int) -> bool|Nothing:
+def gt42(x: int) -> bool|Nada:
     if x > 42:
         return True
     if x >= 0:
         return False
-    return Nothing()
+    return Nada()
 
-class Test_Nothing:
+class Test_Nada:
     def test_identity(self) -> None:
-        no1 = Nothing()
-        no2 = Nothing()
-        no3 = nothing
+        no1 = Nada()
+        no2 = Nada()
+        no3 = nada
         assert no1 is no1
         assert no1 is no2
         assert no3 is no1
-        assert no2 is nothing
+        assert no2 is nada
         if no1 is not no2:
             assert False
         else:
             assert True
 
     def test_equality_identity(self) -> None:
-        no1 = Nothing()
-        no2 = Nothing()
-        no3 = nothing
+        no1 = Nada()
+        no2 = Nada()
+        no3 = nada
 
         assert no1 is no1
         assert no2 is no2
         assert no3 is no2
         assert no1 is no2
         assert no2 is no1
-        assert no1 is nothing
+        assert no1 is nada
 
         assert not (no1 == no2)
         assert no1 != no2
-        assert no3 != nothing
+        assert no3 != nada
         assert not (no1 <= no2)
         assert not (no1 >= no2)
         assert not (no1 < no2)
@@ -79,13 +79,13 @@ class Test_Nothing:
 
 
     def test_len(self) -> None:
-        no1 = Nothing()
+        no1 = Nada()
         assert len(no1) == 0
 
     def test_iterate(self) -> None:
-        no1 = Nothing()
-        no2 = Nothing()
-        no3 = nothing
+        no1 = Nada()
+        no2 = Nada()
+        no3 = nada
         l1 = [42]
         v: int
         for v in no1:
@@ -94,56 +94,56 @@ class Test_Nothing:
             assert False
         assert len(l1) == 1
 
-    def test_get(self) -> None:
-        no1 = Nothing()
-        no2 = Nothing()
-        assert no1.get(42) == 42
-        assert no2.get(21) == 21
-        got1 = no1.get()
-        got2 = no1.get('forty-two')
-        assert got1 is Nothing()
+    def test_nget(self) -> None:
+        no1 = Nada()
+        no2 = Nada()
+        assert no1.nget(42) == 42
+        assert no2.nget(21) == 21
+        got1 = no1.nget()
+        got2 = no1.nget('forty-two')
+        assert got1 is Nada()
         assert got2 is 'forty-two'
         assert got2 == 'forty-two'
-        assert no2.get(13) == (10 + 3)
-        assert no2.get(10//7) == 10//7
+        assert no2.nget(13) == (10 + 3)
+        assert no2.nget(10//7) == 10//7
 
     def test_equal_self(self) -> None:
-        no1 = Nothing()
+        no1 = Nada()
         no1 != no1
-        no1.get(42) == no1.get(42)
-        no1.get(42) != no1.get(21)
+        no1.nget(42) == no1.nget(42)
+        no1.nget(42) != no1.nget(21)
 
     def test_map(self) -> None:
-        no1 = Nothing()
+        no1 = Nada()
         no2 = no1.map(add2)
-        assert no1 is no2 is Nothing()
+        assert no1 is no2 is Nada()
 
     def test_call(self) -> None:
-        no1 = Nothing()
-        assert no1() is Nothing()
-        assert no1() is nothing
-        assert nothing() is nothing
-        assert no1(42) is Nothing()
-        assert no1(a=1, b=2) is Nothing()
+        no1 = Nada()
+        assert no1() is Nada()
+        assert no1() is nada
+        assert nada() is nada
+        assert no1(42) is Nada()
+        assert no1(a=1, b=2) is Nada()
 
     def test_get_set(self) -> None:
-        no1 = Nothing()
-        no2 = Nothing()
+        no1 = Nada()
+        no2 = Nada()
         no2[5] = 101
-        assert no2 is nothing
+        assert no2 is nada
         got = no1[42]
-        assert got is nothing
-        assert no1[2:7:1] is nothing
+        assert got is nada
+        assert no1[2:7:1] is nada
         no2[1:40:2] = 1,2,3,4,5,6,7
-        assert no2 is nothing
-        got = no1.get()
-        assert got is nothing
-        got = no1.get(42)
+        assert no2 is nada
+        got = no1.nget()
+        assert got is nada
+        got = no1.nget(42)
         assert got == 42
 
     def test_add_mul(self) -> None:
-        no1 = Nothing()
-        no2 = Nothing()
+        no1 = Nada()
+        no2 = Nada()
         assert 2 + 3 == 5
         assert no2 + 99 != no1
         assert no2 + 99 is no1
@@ -156,8 +156,8 @@ class Test_Nothing:
 
 class test_arbitrary_Methods:
     def test_arbitrary_methods(self) -> None:
-        no1 = Nothing()
-        no2 = Nothing()
-        assert no1.foo(23, 12, bar='five') is nothing
-        assert no2.foo() is nothing
-        assert no1.foo(42).bar("Buggy", "the", "clown") == no2.baz[42] == nothing
+        no1 = Nada()
+        no2 = Nada()
+        assert no1.foo(23, 12, bar='five') is nada
+        assert no2.foo() is nada
+        assert no1.foo(42).bar("Buggy", "the", "clown") == no2.baz[42] == nada

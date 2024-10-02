@@ -12,43 +12,61 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-### Singleton Representing a Non-existing Value
+"""### Singleton Representing a Non-existing Value
 
-A version of grscheller.fp.nada geared for use in less strictly typed code.
+An attempt to give Python a "bottom" type.
 
+* **nada** is an attempt to give Python a "bottom" type
+
+While a true bottom type has no instances, `nada` is a singleton. Python's
+evolving typing system seems to reject the concept of a true bottom type.
+
+* types like `None` and `()` make for lousy bottoms
+  * they take few methods (much less EVERY method)
+  * `None` has no length and not indexable, `()` is at least iterable
+  * returned values must be constantly checked for
+    * preventing one from blissfully go down the "happy path"
+  * `None` and `()` are commonly used as sentinel values
+    * hindering both as being interpreted as "nothingness"
+
+The `nada` object makes for a better bottom like singleton object than
+either `None` and `()` do.
 """
 
 from __future__ import annotations
-from typing import Any, Callable, Iterator, NewType
+from typing import Any, Callable, Final, Iterator
 
-__all__ = [ 'Nothing', 'nothing' ]
+__all__ = [ 'Nada', 'nada' ]
 
-_S = NewType('_S', tuple[tuple[()], tuple[tuple[()], tuple[tuple[()], None]]])
-_sentinel: _S = _S(((), ((), ((), None))))
+class _Sentinel():
+    def __repr__(self) -> str:
+        return '_Sentinel()'
 
-class Nothing():
+_sentinel: Final[_Sentinel] = _Sentinel()
+
+class Nada():
     """
     #### Singleton representing a missing value.
 
-    * singleton nothing: nothing = Nothing() represents a non-existent value
+    * singleton nada: nada = Nada() represents a non-existent value
     * returns itself for arbitrary method calls
     * returns itself if called as a Callable with arbitrary arguments
     * interpreted as an empty container by standard Python functions
     * warning: non-standard equality semantics
       * comparison compares true only when 2 non-missing values compare true
         * when compared to itself behaves somewhat like IEEE Float NAN's
-        * `nothing is nothing` is true
-        * `nothing == nothing` is false
-        * `nothing != nothing` is true
+        * `nada is nada` is true
+        * `nada == nada` is false
+        * `nada != nada` is true
       * thus a == b means two non-missing values compare as equal
+    * warning: does not handle named arguments
 
     """
     __slots__ = ()
 
-    def __new__(cls) -> Nothing:
+    def __new__(cls) -> Nada:
         if not hasattr(cls, 'instance'):
-            cls.instance = super(Nothing, cls).__new__(cls)
+            cls.instance = super(Nada, cls).__new__(cls)
             cls._hash = hash((_sentinel, (_sentinel,)))
         return cls.instance
 
@@ -59,7 +77,7 @@ class Nothing():
         return self._hash
 
     def __repr__(self) -> str:
-        return 'nothing'
+        return 'nada'
 
     def __bool__(self) -> bool:
         return False
@@ -67,17 +85,17 @@ class Nothing():
     def __len__(self) -> int:
         return 0
 
-    def __add__(self, right: Any) -> Nothing:
-        return Nothing()
+    def __add__(self, right: Any) -> Nada:
+        return Nada()
 
-    def __radd__(self, left: Any) -> Nothing:
-        return Nothing()
+    def __radd__(self, left: Any) -> Nada:
+        return Nada()
 
-    def __mul__(self, right: Any) -> Nothing:
-        return Nothing()
+    def __mul__(self, right: Any) -> Nada:
+        return Nada()
 
-    def __rmul__(self, left: Any) -> Nothing:
-        return Nothing()
+    def __rmul__(self, left: Any) -> Nada:
+        return Nada()
 
     def __eq__(self, right: Any) -> bool:
         return False
@@ -98,28 +116,28 @@ class Nothing():
         return False
 
     def __getitem__(self, index: int|slice) -> Any:
-        return Nothing()
+        return Nada()
 
     def __setitem__(self, index: int|slice, item: Any) -> None:
         return
 
     def __call__(*args: Any, **kwargs: Any) -> Any:
-        return Nothing()
+        return Nada()
 
     def __getattr__(self, name: str) -> Callable[[Any], Any]:
         """Comment out for doc generation, pdoc gags on this method."""
         def method(*args: Any, **kwargs: Any) -> Any:
-            return Nothing()
+            return Nada()
         return method
 
-    def get(self, alt: Any=_sentinel) -> Any:
+    def nget(self, alt: Any=_sentinel) -> Any:
         """
-        Get an alternate value, defaults to Nothing().
+        Get an alternate value, defaults to Nada().
 
         """
         if alt == _sentinel:
-            return Nothing()
+            return Nada()
         else:
             return alt
 
-nothing = Nothing()
+nada = Nada()
