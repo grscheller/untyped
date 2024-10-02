@@ -19,6 +19,12 @@ PyPI grscheller.untyped project.
 
 ## Releases and Important Milestones
 
+### Version 0.3.0 - PyPI Release: 2024-10-02
+
+* renamed untyped.nothing to untyped.nada
+  * Nothing -> Nada
+  * nothing -> nada
+
 ### Version 0.2.0 - PyPI Release: 2024-08-17
 
 * typing improvements back-ported from grscheller.fp
