@@ -19,6 +19,12 @@ PyPI grscheller.untyped project.
 
 ## Releases and Important Milestones
 
+### Version 0.4.0 - PyPI Release: 2024-10-03
+
+* API change
+  * changed method name `Nada.nget` to `Nada.nada_get`
+    * a little more inconvenient, but less likely of a name collision
+
 ### Version 0.3.0 - PyPI Release: 2024-10-02
 
 * renamed untyped.nothing to untyped.nada

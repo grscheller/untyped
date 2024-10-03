@@ -22,7 +22,7 @@ PyPI grscheller namespace modules intended for use with less strictly typed code
 ---
 
 """
-__version__ = "0.3.1.0"
+__version__ = "0.4.0"
 __author__ = "Geoffrey R. Scheller"
 __copyright__ = "Copyright (c) 2024 Geoffrey R. Scheller"
 __license__ = "Apache License 2.0"
