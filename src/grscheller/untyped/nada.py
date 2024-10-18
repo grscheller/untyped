@@ -47,6 +47,8 @@ _sentinel: Final[_Sentinel] = _Sentinel()
 class Nada():
     """#### Singleton representing a missing value.
 
+    WARNING: OBSOLETED - use grscheller.experimental.nada instead
+
     * singleton nada: nada = Nada() represents a non-existent value
     * returns itself for arbitrary method calls
     * returns itself if called as a Callable with arbitrary arguments

@@ -1,13 +1,13 @@
 # Python modules geared to code that is not strictly typed
 
-Useful modules I found difficult to implement in a strictly
-typed manner.
+Class Nada represents a missing value. Unlike None, it accepts almost
+all methods and returns itself. See [grscheller.experimental][2] on PyPI
+for the current maintained version.
 
 * **Repositories**
-  * [grscheller.untyped][1] project on *PyPI*
-  * [Source code][2] on *GitHub*
-* **Detailed documentation**
-  * [Detailed API documentation][3] on *GH-Pages*
+  * obsoleted PyPI project [grscheller.untyped][1]
+  * replaced by PyPI project [grscheller.experimental][2]
+  * [Source code][3] on *GitHub*
 
 ### Modules
 
@@ -18,5 +18,5 @@ typed manner.
 ---
 
 [1]: https://pypi.org/project/grscheller.untyped/
-[2]: https://github.com/grscheller/untyped/
-[3]: https://grscheller.github.io/untyped/
+[2]: https://pypi.org/project/grscheller.experimental/
+[3]: https://github.com/grscheller/untyped/

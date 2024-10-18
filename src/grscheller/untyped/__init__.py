@@ -13,16 +13,26 @@
 # limitations under the License.
 
 """
-### Untyped Modules
+### Untyped Modules - OBSOLETED!
 
-PyPI grscheller namespace modules intended for use with less strictly typed code.
+**WARNING:** This project has been incorporated into grscheller.experimental
+
+PyPI grscheller namespace modules originally intended for use with less strictly
+typed code. Decided to use with strict typing, hence name change was needed.
 
 * module `grscheller.untyped.nada`
+
+#### Version correspondence
+
+Except for import statements, the following two module releases are identical:
+
+* grscheller.untyped.nada - v0.4.1         (no longer maintained)
+* grscheller.experimental.nada - v0.1.0
 
 ---
 
 """
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 __author__ = "Geoffrey R. Scheller"
 __copyright__ = "Copyright (c) 2024 Geoffrey R. Scheller"
 __license__ = "Apache License 2.0"

@@ -1,23 +1,19 @@
 # CHANGELOG
 
-PyPI grscheller.untyped project.
-
-#### Semantic versioning
-
-* first digit
-  * major event, epoch, or paradigm shift
-* second digit
-  * breaking API changes
-  * major changes
-* third digit
-  * API additions
-  * bug fixes
-  * minor changes
-  * significant documentation updates
-* forth digit (development environment only)
-  * commit count of "non-trivial" changes/regressions
+PyPI grscheller.untyped project: OBSOLETED!
 
 ## Releases and Important Milestones
+
+### Version 0.4.1 - PyPI Release: 2024-10-17
+
+* Obsoleted PyPI project
+  * use grscheller.experimental instead
+    * corresponds to grscheller.experimental version 0.1.0
+  * decided to use with strict typing
+    * hence a name change was essential
+    * did not want to put back in grscheller.fp
+      * having both classes Nada and MB there redundant
+      * still want to preserve this implementation
 
 ### Version 0.4.0 - PyPI Release: 2024-10-03
 
